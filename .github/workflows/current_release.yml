@@ -38,9 +38,18 @@ jobs:
               working-directory: ./
               run: docker-compose -f ./docker-compose.yml up -d
       
-            - name: Aguardando os Serviços subirem
-              working-directory: ./
-              run: sleep 25
+            - name: Aguardando o serviços subirem
+              run: |
+                RETRIES=5
+                until curl -s http://localhost:8091/actuator/health | grep -q 'UP'; do
+                  echo "Aguardando o MS Api Livros subir..."
+                  sleep 15
+                  RETRIES=$((RETRIES-1))
+                  if [ $RETRIES -le 0 ]; then
+                    echo "O MS Api Livros não subiu a tempo."
+                    exit 1
+                  fi
+                done
       
             - name: Testes de Integração do MS Api Livros
               working-directory: ./api-livros
