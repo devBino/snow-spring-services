@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS tb_idioma (
+    id INT NOT NULL AUTO_INCREMENT,
+    ativo INT NOT NULL,
+    idioma VARCHAR(50) DEFAULT NULL,
+    PRIMARY KEY (id),
+    UNIQUE (idioma)
+);
