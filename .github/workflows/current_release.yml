@@ -44,7 +44,7 @@ jobs:
                 sleep 20
                 docker ps
       
-            - name: Testes de Integração do MS Api Livros
+            - name: Testes Unitários e de Integração do MS Api Livros
               working-directory: ./api-livros
               run: mvn test -Pdevelopment
       
