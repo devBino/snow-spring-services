@@ -9,4 +9,5 @@ O presente projeto consiste em um desafio técnico abordando 3 aplicações em S
 |Release | Status | Milestone |
 |--------|--------|--------|
 |Release/1.0.0|![CI Release/1.0.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.0.0) | [Fase 1](https://github.com/devBino/snow-spring-services/milestone/1)|
-|Master|![Master](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.0.0) |[Fase 1](https://github.com/devBino/snow-spring-services/milestone/1)|
+|Release/1.1.0|![CI Release/1.1.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.1.0) | [Fase 2](https://github.com/devBino/snow-spring-services/milestone/2)|
+|Master|![Master](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.1.0) |[Fase 2](https://github.com/devBino/snow-spring-services/milestone/2)|
