@@ -2,7 +2,7 @@ name: CI dos Projetos Spring Boot SnowManLabs
 
 on:
     push:
-        branches: [release/1.1.0]
+        branches: [develop, release/1.2.0]
 
 jobs:
     build:
