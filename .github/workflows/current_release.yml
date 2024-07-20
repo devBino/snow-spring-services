@@ -4,6 +4,9 @@ on:
     push:
         branches: [develop, release/1.2.0]
 
+env:
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -21,7 +24,7 @@ jobs:
 
             - name: Build do MS Api Livros
               working-directory: ./api-livros
-              run: mvn package -Pdevelopment
+              run: mvn package -DskipTests
 
             - name: Build do MS Servico Email
               working-directory: ./servico-email
@@ -30,3 +33,19 @@ jobs:
             - name: Build do MS Objetos Seguranca
               working-directory: ./objetos-seguranca
               run: mvn package -Pdevelopment
+
+            - name: Configurando Docker Compose
+              working-directory: ./
+              run: docker-compose -f ./docker-compose.yml up -d
+      
+            - name: Aguardando os Serviços subirem
+              working-directory: ./
+              run: sleep 25
+      
+            - name: Testes de Integração do MS Api Livros
+              working-directory: ./api-livros
+              run: mvn test -Pdevelopment
+      
+            - name: Derrubando os Serviços
+              working-directory: ./
+              run: docker-compose -f ./docker-compose.yml down

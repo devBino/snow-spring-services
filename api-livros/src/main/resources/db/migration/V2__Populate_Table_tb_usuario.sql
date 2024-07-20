@@ -1,4 +1,4 @@
-INSERT INTO tb_usuario (ativo, nome, password, "user") 
+INSERT INTO tb_usuario (ativo, nome, password, usuario) 
 VALUES 
 (1, 'demo', 'ZGVtbw==', 'demo'),
 (1, 'spiderman', 'c3BpZGVybWFu', 'spiderman'),
