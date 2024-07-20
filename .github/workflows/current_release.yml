@@ -41,13 +41,13 @@ jobs:
             - name: Aguardando os Serviços subirem
               working-directory: ./
               run: |
-                sleep 15
+                sleep 20
                 docker ps
       
-            # - name: Testes de Integração do MS Api Livros
-            #   working-directory: ./api-livros
-            #   run: mvn test -Pdevelopment
+            - name: Testes de Integração do MS Api Livros
+              working-directory: ./api-livros
+              run: mvn test -Pdevelopment
       
-            # - name: Derrubando os Serviços
-            #   working-directory: ./
-            #   run: docker compose down
+            - name: Derrubando os Serviços
+              working-directory: ./
+              run: docker compose down
