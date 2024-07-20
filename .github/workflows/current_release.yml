@@ -1,0 +1,32 @@
+name: CI dos Projetos Spring Boot SnowManLabs
+
+on:
+    push:
+        branches: [release/1.0.0]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+          
+            - name: Baixando Codigos Fontes
+              uses: actions/checkout@v3
+
+            - name: Setup JDK 17
+              uses: actions/setup-java@v3
+              with:
+                distribution: 'temurin'
+                java-version: '17'
+                cache: maven
+
+            - name: Build do MS Api Livros
+              working-directory: ./api-livros
+              run: mvn package -Pdevelopment
+
+            - name: Build do MS Servico Email
+              working-directory: ./servico-email
+              run: mvn package -Pdevelopment
+
+            - name: Build do MS Objetos Seguranca
+              working-directory: ./objetos-seguranca
+              run: mvn package -Pdevelopment
