@@ -2,7 +2,7 @@
 
 ## Apresentação do Projeto
 <p style="text-align: justify;">
-O presente projeto consiste em um desafio técnico abordando 3 aplicações em Spring Boot. Esse documento será atualizado ao longo do desenvolvimento desse desafio.
+O presente projeto consiste em um desafio técnico abordando 3 aplicações em Spring Boot. Esse documento será atualizado ao longo do desenvolvimento desse desafio. 
 </p>
 
 ## Pipelines CI/CD
