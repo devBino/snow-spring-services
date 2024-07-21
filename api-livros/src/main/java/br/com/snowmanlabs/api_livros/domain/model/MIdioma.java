@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Entidade do banco de dados representando usuarios
+ * Entidade do banco de dados representando idiomas
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_usuario")
-public class MUsuario implements Serializable {
+@Table(name = "tb_idioma")
+public class MIdioma implements Serializable {
     
     public static final Long serialVersionUID = 1L;
 
@@ -28,9 +28,13 @@ public class MUsuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-    private String usuario;
-    private String password;
     private int ativo;
+    private String nome;
 
+    @Column(name = "cod_idioma")
+    private String codIdioma;
+
+    @Column(name = "cod_regiao")
+    private String codRegiao;
+    
 }

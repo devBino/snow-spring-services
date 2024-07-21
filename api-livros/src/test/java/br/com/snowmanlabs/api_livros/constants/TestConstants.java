@@ -13,6 +13,9 @@ public class TestConstants {
 
     public static final String PATH_AUTH_TOKEN = "/auth/token/%s/%s";
     public static final String PATH_TESTE_TOKEN = "/auth/teste-token";
+
+    public static final String PATH_IDIOMA = "/idioma/%s";
+
     public static final int SERVER_PORT = 8091;
 
 }
