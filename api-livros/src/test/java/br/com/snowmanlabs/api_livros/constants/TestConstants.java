@@ -16,6 +16,8 @@ public class TestConstants {
 
     public static final String PATH_IDIOMA = "/idioma/%s";
 
+    public static final String PATH_AUTHOR = "/autor/%s";
+
     public static final int SERVER_PORT = 8091;
 
 }
