@@ -16,6 +16,11 @@ public class MensagemHttpStatusProvider {
         return Map.of("mensagem", mensagem);
     }
 
+    public ResponseEntity<?> getGenericResponseCreated(final Object body){
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(body);
+    }
+
     public ResponseEntity<?> getGenericResponseSucess(final Object body){
         return ResponseEntity.ok().body(body);
     }
@@ -39,6 +44,10 @@ public class MensagemHttpStatusProvider {
         return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE)
                 .body( getGenericMensagemResponse("Ocorreu um erro interno na aplicação, se o erro persistir por favor entre em contato com suporte") );
 
+    }
+
+    public ResponseEntity<?> getNoContent(){
+        return ResponseEntity.noContent().build();
     }
 
 }
