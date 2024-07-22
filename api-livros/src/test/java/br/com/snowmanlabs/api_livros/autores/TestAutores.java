@@ -4,7 +4,6 @@ import static br.com.snowmanlabs.api_livros.constants.TestConstants.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Objects;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.snowmanlabs.api_livros.domain.dto.AutorDTO;
+import br.com.snowmanlabs.api_livros.mock.MockTests;
 import br.com.snowmanlabs.api_livros.request.Requests;
 import io.restassured.response.Response;
 
@@ -23,7 +23,9 @@ public class TestAutores {
     @Order(1)
     public void testCriarAutor(){
 
-        AutorDTO dto = criarERetornarRegistro();
+        AutorDTO dto = MockTests.getAutorDTO();
+
+        dto.setId(null);
 
         Response response = Requests
             .responsePost(String.format(PATH_AUTHOR, "criar"), dto);
@@ -47,7 +49,9 @@ public class TestAutores {
     @Order(2)
     public void testUpdateAutor(){
 
-        AutorDTO dto = criarERetornarRegistro();
+        AutorDTO dto = MockTests.getAutorDTO();
+
+        dto.setId(1L);
 
         Response response = Requests
             .responsePut(String.format(PATH_AUTHOR, "atualizar"), dto);
@@ -74,22 +78,9 @@ public class TestAutores {
 
         AutorDTO dto = criarERetornarRegistro();
 
-        Response response = Requests
-            .responsePost(String.format(PATH_AUTHOR, "criar"), dto);
-        
-        response
-            .then()
-            .assertThat()
-            .statusCode(201);
-
-        AutorDTO dtoRetornado = response
-            .then()
-            .extract()
-            .as(AutorDTO.class);
-
         final String endPointDelete = new StringBuilder()
             .append( String.format(PATH_AUTHOR, "deletar/") )
-            .append( dtoRetornado.getId() )
+            .append( dto.getId() )
             .toString();
 
         Response responseDelete = Requests
@@ -132,15 +123,9 @@ public class TestAutores {
 
     private AutorDTO criarERetornarRegistro(){
 
-        AutorDTO dto = new AutorDTO();
+        AutorDTO dto = MockTests.getAutorDTO();
 
-        String hashTeste = UUID.randomUUID().toString();
-
-        String nomeAutor = hashTeste.length() > 15
-            ? hashTeste.substring(0, 15) : hashTeste;
-
-        dto.setAtivo(1);
-        dto.setNome(nomeAutor);
+        dto.setId(null);
 
         Response response = Requests
             .responsePost(String.format(PATH_AUTHOR, "criar"), dto);
@@ -154,15 +139,7 @@ public class TestAutores {
 
     private long criarRegistroERetornarId(){
 
-        AutorDTO dto = new AutorDTO();
-
-        String hashTeste = UUID.randomUUID().toString();
-
-        String nomeAutor = hashTeste.length() > 15
-            ? hashTeste.substring(0, 15) : hashTeste;
-
-        dto.setAtivo(1);
-        dto.setNome(nomeAutor);
+        AutorDTO dto = MockTests.getAutorDTO();
 
         Response response = Requests
             .responsePost(String.format(PATH_AUTHOR, "criar"), dto);

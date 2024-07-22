@@ -3,7 +3,6 @@ import static br.com.snowmanlabs.api_livros.constants.TestConstants.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Objects;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.snowmanlabs.api_livros.domain.dto.IdiomaDTO;
+import br.com.snowmanlabs.api_livros.mock.MockTests;
 import br.com.snowmanlabs.api_livros.request.Requests;
 import io.restassured.response.Response;
 
@@ -22,7 +22,9 @@ public class TestIdiomas {
     @Order(1)
     public void testCriarIdioma(){
 
-        IdiomaDTO dto = criarERetornarRegistro();
+        IdiomaDTO dto = MockTests.getIdiomaDTO();
+
+        dto.setId(null);
 
         Response response = Requests
             .responsePost(String.format(PATH_IDIOMA, "criar"), dto);
@@ -48,7 +50,9 @@ public class TestIdiomas {
     @Order(2)
     public void testUpdateIdioma(){
 
-        IdiomaDTO dto = criarERetornarRegistro();
+        IdiomaDTO dto = MockTests.getIdiomaDTO();
+
+        dto.setId(1L);
 
         Response response = Requests
             .responsePut(String.format(PATH_IDIOMA, "atualizar"), dto);
@@ -77,22 +81,9 @@ public class TestIdiomas {
 
         IdiomaDTO dto = criarERetornarRegistro();
 
-        Response response = Requests
-            .responsePost(String.format(PATH_IDIOMA, "criar"), dto);
-        
-        response
-            .then()
-            .assertThat()
-            .statusCode(201);
-
-        IdiomaDTO dtoRetornado = response
-            .then()
-            .extract()
-            .as(IdiomaDTO.class);
-
         final String endPointDelete = new StringBuilder()
             .append( String.format(PATH_IDIOMA, "deletar/") )
-            .append( dtoRetornado.getId() )
+            .append( dto.getId() )
             .toString();
 
         Response responseDelete = Requests
@@ -137,17 +128,9 @@ public class TestIdiomas {
 
     private IdiomaDTO criarERetornarRegistro(){
 
-        IdiomaDTO dto = new IdiomaDTO();
+        IdiomaDTO dto = MockTests.getIdiomaDTO();
 
-        String hashTeste = UUID.randomUUID().toString();
-
-        String nomeIdioma = hashTeste.length() > 20
-            ? hashTeste.substring(0, 20) : hashTeste;
-
-        dto.setAtivo(1);
-        dto.setNome(nomeIdioma);
-        dto.setCodIdioma(hashTeste.substring(0, 4));
-        dto.setCodRegiao(hashTeste.substring(0, 4));
+        dto.setId(null);
 
         Response response = Requests
             .responsePost(String.format(PATH_IDIOMA, "criar"), dto);
@@ -161,17 +144,7 @@ public class TestIdiomas {
 
     private long criarRegistroERetornarId(){
 
-        IdiomaDTO dto = new IdiomaDTO();
-
-        String hashTeste = UUID.randomUUID().toString();
-
-        String nomeIdioma = hashTeste.length() > 20
-            ? hashTeste.substring(0, 20) : hashTeste;
-
-        dto.setAtivo(1);
-        dto.setNome(nomeIdioma);
-        dto.setCodIdioma(hashTeste.substring(0, 4));
-        dto.setCodRegiao(hashTeste.substring(0, 4));
+        IdiomaDTO dto = MockTests.getIdiomaDTO();
 
         Response response = Requests
             .responsePost(String.format(PATH_IDIOMA, "criar"), dto);

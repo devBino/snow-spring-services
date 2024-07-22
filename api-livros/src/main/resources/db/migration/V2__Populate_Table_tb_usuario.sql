@@ -1,5 +1,5 @@
-INSERT INTO tb_usuario (ativo, nome, password, usuario) 
+INSERT INTO tb_usuario (nome, password, usuario) 
 VALUES 
-(1, 'demo', 'ZGVtbw==', 'demo'),
-(1, 'spiderman', 'c3BpZGVybWFu', 'spiderman'),
-(1, 'thanos', 'dGhhbm9z', 'thanos');
+('demo', 'ZGVtbw==', 'demo'),
+('spiderman', 'c3BpZGVybWFu', 'spiderman'),
+('thanos', 'dGhhbm9z', 'thanos');

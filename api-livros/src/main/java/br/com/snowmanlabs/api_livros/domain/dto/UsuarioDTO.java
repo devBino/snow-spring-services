@@ -2,6 +2,8 @@ package br.com.snowmanlabs.api_livros.domain.dto;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +22,10 @@ public class UsuarioDTO implements Serializable {
 
     private String nome;
     private String user;
+
+    @JsonIgnore
     private String password;
+    
     private int ativo;
 
 }
