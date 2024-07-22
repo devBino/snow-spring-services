@@ -30,7 +30,33 @@ jobs:
 
             - name: Build do MS Api Livros
               working-directory: ./api-livros
-              run: mvn package -Pdevelopment
+              run: mvn package -DskipTests
+
+            - name: Build do MS Servico Email
+              working-directory: ./servico-email
+              run: mvn package -DskipTests
+
+            - name: Build do MS Objetos Seguranca
+              working-directory: ./objetos-seguranca
+              run: mvn package -DskipTests
+
+            - name: Configurando Docker Compose
+              working-directory: ./
+              run: docker compose up -d --build
+               
+            - name: Aguardando os Serviços subirem
+              working-directory: ./
+              run: |
+                sleep 20
+                docker ps
+      
+            - name: Testes Unitários e de Integração do MS Api Livros
+              working-directory: ./api-livros
+              run: mvn test -Pdevelopment
+      
+            - name: Derrubando os Serviços
+              working-directory: ./
+              run: docker compose down
 
             - name: Gerando Imagens dos Microsserviços
               working-directory: ./
