@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,15 +25,37 @@ public class LivroDTO implements Serializable {
 
     private Long id;
     private int ativo;
+
+    @NotNull
+    @NotEmpty
     private String titulo;
+
+    @NotNull
+    @Positive
     private Long autorId;
+
+    @NotNull
+    @Positive
     private Long idiomaId;
+
+    @NotNull
+    @Positive
     private Long usuarioId;
+
+    @NotNull
     private LocalDateTime dataPublicacao;
+
     private String editora;
+
+    @NotNull
+    @Positive
     private int numeroPaginas;
+
     private String genero;
     private String sinopse;
+
+    @NotNull
+    @DecimalMin(value = "0.0", inclusive = true)
     private BigDecimal valor;
     
 }

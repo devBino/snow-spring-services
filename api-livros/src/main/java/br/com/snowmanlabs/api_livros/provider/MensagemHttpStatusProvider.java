@@ -1,10 +1,14 @@
 package br.com.snowmanlabs.api_livros.provider;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+
+import jakarta.validation.ConstraintViolation;
 
 /**
  * Padroniza retorno de mensagens para responses Http Status
@@ -104,6 +108,32 @@ public class MensagemHttpStatusProvider {
     public ResponseEntity<?> getCustomizedBadRequest(final Object body){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
             .body(body);
+    }
+
+    /**
+     * Retorna response com erros de validação
+     * @param <T>
+     * @param erros
+     * @return
+     */
+    public <T> ResponseEntity<?> getResponseErrosValidations(Set<ConstraintViolation<T>> erros){
+        
+        Map<String, String> mapErros = new HashMap<>();
+       
+        erros.forEach(e -> {
+            mapErros.put(
+                e.getPropertyPath().toString(), 
+                new StringBuilder()
+                    .append("Campo [")
+                    .append( e.getPropertyPath().toString() )
+                    .append("] ")
+                    .append( e.getMessage() )
+                    .toString()
+            );
+        });
+
+        return ResponseEntity.badRequest().body(Map.of("erros", mapErros));
+
     }
 
 }

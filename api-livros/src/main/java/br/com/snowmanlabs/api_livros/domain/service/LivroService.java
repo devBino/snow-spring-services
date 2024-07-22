@@ -5,6 +5,7 @@ import static br.com.snowmanlabs.api_livros.domain.service.constants.ServiceCons
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import br.com.snowmanlabs.api_livros.domain.converter.LivroConverter;
 import br.com.snowmanlabs.api_livros.domain.dto.LivroDTO;
 import br.com.snowmanlabs.api_livros.domain.dto.ListaLivrosDTO;
 import br.com.snowmanlabs.api_livros.domain.model.MLivro;
 import br.com.snowmanlabs.api_livros.domain.repository.LivroRepository;
+import jakarta.validation.ConstraintViolation;
 
 /**
  * Serve a API respondendo as requisições da camada 
@@ -34,6 +37,9 @@ public class LivroService
     @Autowired
     private LivroConverter converter;
 
+    @Autowired
+    private LocalValidatorFactoryBean validator;
+
     public LivroService(){
         super("Livro não encontrado");
     }
@@ -45,7 +51,15 @@ public class LivroService
      */
     public ResponseEntity<?> criar(final LivroDTO dto){
 
+        Set<ConstraintViolation<LivroDTO>> erros = validator.validate(dto);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
+
         MLivro model = converter.toModel(dto);
+
+        model.setAtivo(1);
 
         return mensagemProvider.getGenericResponseCreated(
             converter.toDTO( repository.save(model) ) );
@@ -58,6 +72,12 @@ public class LivroService
      * @return
      */
     public ResponseEntity<?> atualizar(final LivroDTO dto){
+
+        Set<ConstraintViolation<LivroDTO>> erros = validator.validate(dto);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
 
         final Optional<MLivro> optModel = repository.findById(dto.getId());
 
