@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.snowmanlabs.api_livros.domain.dto.AutorDTO;
 import br.com.snowmanlabs.api_livros.domain.dto.IdiomaDTO;
 import br.com.snowmanlabs.api_livros.domain.dto.ListaIdiomasDTO;
 import br.com.snowmanlabs.api_livros.domain.service.IdiomaService;
@@ -45,7 +44,10 @@ public class IdiomaController {
     @PostMapping(
         value = "/criar", 
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Cria um Novo Idioma",
@@ -54,10 +56,16 @@ public class IdiomaController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "201",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = IdiomaDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -77,7 +85,10 @@ public class IdiomaController {
     @PutMapping(
         value = "/atualizar", 
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Atualiza um Idioma Existente",
@@ -86,10 +97,16 @@ public class IdiomaController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = IdiomaDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -108,7 +125,10 @@ public class IdiomaController {
      */
     @GetMapping(
         value = "/detalhar/{id}", 
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Detalhar Idioma pelo ID",
@@ -117,10 +137,16 @@ public class IdiomaController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = AutorDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -153,10 +179,16 @@ public class IdiomaController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = ListaIdiomasDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = ListaIdiomasDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = ListaIdiomasDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
