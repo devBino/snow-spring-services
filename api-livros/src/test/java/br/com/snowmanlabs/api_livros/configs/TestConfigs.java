@@ -1,18 +1,32 @@
 package br.com.snowmanlabs.api_livros.configs;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import br.com.snowmanlabs.api_livros.domain.converter.AutorConverter;
+import br.com.snowmanlabs.api_livros.domain.converter.IdiomaConverter;
+import br.com.snowmanlabs.api_livros.domain.converter.LivroConverter;
 
-@SpringBootTest
-@ActiveProfiles("development")
+@Configuration
 public class TestConfigs {
     
-    @Test
-    public void testConfigIsOkParaCI(){
-        assertTrue(true);
+    @Bean
+    @Primary
+    public IdiomaConverter idiomaConverter(){
+        return new IdiomaConverter();
+    }
+
+    @Bean
+    @Primary
+    public AutorConverter autorConverter(){
+        return new AutorConverter();
+    }
+
+    @Bean
+    @Primary
+    public LivroConverter livroConverter(){
+        return new LivroConverter();
     }
 
 }
