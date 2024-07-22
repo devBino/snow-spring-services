@@ -43,7 +43,7 @@ public class Auth {
             @ApiResponse(
                 description = "Success", responseCode = "200",
                 content = @Content(
-                    mediaType = "application/json",
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = TokenDTO.class)
                 )
             ),

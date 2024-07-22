@@ -49,7 +49,10 @@ public class LivroController {
     @PostMapping(
         value = "/criar", 
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Cria um Novo Livro",
@@ -58,10 +61,16 @@ public class LivroController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "201",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = LivroDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = LivroDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = LivroDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -81,7 +90,10 @@ public class LivroController {
     @PutMapping(
         value = "/atualizar", 
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Atualiza um Livro Existente",
@@ -90,10 +102,16 @@ public class LivroController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = LivroDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = LivroDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = LivroDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -112,7 +130,10 @@ public class LivroController {
      */
     @GetMapping(
         value = "/detalhar/{id}", 
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Detalhar Livro pelo ID",
@@ -121,10 +142,16 @@ public class LivroController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = LivroDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = LivroDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = LivroDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -157,10 +184,16 @@ public class LivroController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = ListaLivrosDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = ListaLivrosDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = ListaLivrosDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -189,7 +222,7 @@ public class LivroController {
             @ApiResponse(
                 description = "Success", responseCode = "200",
                 content = @Content(
-                    mediaType = "application/json",
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = String.class)
                 )
             ),
@@ -208,7 +241,13 @@ public class LivroController {
      * @param nomeAutor
      * @return
      */
-    @GetMapping(value = "/listar-filtro", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(
+        value = "/listar-filtro", 
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
+    )
     @Operation(
         summary = "Listagem de Livros por Nome Autor ou por Título do Livro",
         description = "Listagem de Livros por Nome Autor ou por Título do Livro",
@@ -216,10 +255,16 @@ public class LivroController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    array = @ArraySchema( schema = @Schema(implementation = LivroDTO.class)  )
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        array = @ArraySchema( schema = @Schema(implementation = LivroDTO.class)  )
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        array = @ArraySchema( schema = @Schema(implementation = LivroDTO.class)  )
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),

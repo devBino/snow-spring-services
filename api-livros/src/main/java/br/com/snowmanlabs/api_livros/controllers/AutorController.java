@@ -44,7 +44,10 @@ public class AutorController {
     @PostMapping(
         value = "/criar", 
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Cria um Novo Autor",
@@ -53,10 +56,16 @@ public class AutorController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "201",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = AutorDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = AutorDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = AutorDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -76,7 +85,10 @@ public class AutorController {
     @PutMapping(
         value = "/atualizar", 
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Atualiza um Autor Existente",
@@ -85,10 +97,16 @@ public class AutorController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = AutorDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = AutorDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = AutorDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -107,7 +125,10 @@ public class AutorController {
      */
     @GetMapping(
         value = "/detalhar/{id}", 
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
     )
     @Operation(
         summary = "Detalhar Autor pelo ID",
@@ -116,10 +137,16 @@ public class AutorController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = AutorDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = AutorDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = AutorDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
@@ -152,10 +179,16 @@ public class AutorController {
         responses = {
             @ApiResponse(
                 description = "Success", responseCode = "200",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = ListaAutoresDTO.class)
-                )
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = ListaAutoresDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = ListaAutoresDTO.class)
+                    )
+                }
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
