@@ -2,7 +2,7 @@ name: CI dos Projetos Spring Boot SnowManLabs
 
 on:
     push:
-        branches: [develop, release/1.2.0]
+        branches: [develop, release/1.3.0]
 
 env:
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
