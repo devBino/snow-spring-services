@@ -1,6 +1,11 @@
 package br.com.snowmanlabs.api_livros.domain.service;
 
+import static br.com.snowmanlabs.api_livros.domain.service.constants.ServiceConstants.*;
+
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -64,7 +69,7 @@ public class LivroService
 
         updatedModel.setId( optModel.get().getId() );
 
-        return mensagemProvider.getGenericResponseSucess( 
+        return mensagemProvider.getGenericResponseSuccess( 
             converter.toDTO( repository.save(updatedModel)) );
 
     }
@@ -82,7 +87,7 @@ public class LivroService
             return mensagemProvider.getGenericResponseNotFound(mensagemEntidadeNaoEncontrado);
         }
 
-        return mensagemProvider.getGenericResponseSucess( 
+        return mensagemProvider.getGenericResponseSuccess( 
             converter.toDTO(optModel.get()) );
 
     }
@@ -128,8 +133,85 @@ public class LivroService
         dto.setTotalPaginas( registros.getTotalPages() );
         dto.setTotalRegistros( registros.getTotalElements() );
 
-        return mensagemProvider.getGenericResponseSucess( dto );
+        return mensagemProvider.getGenericResponseSuccess( dto );
         
+    }
+
+    /**
+     * Retorna listagem de livros de acordo com filtros
+     * @param nome
+     * @return
+     */
+    public ResponseEntity<?> listarFiltros(Map<String, String> filtros){
+
+        String nomeAutor = filtros.get(FILTRO_NOME_AUTOR);
+        String tituloLivro = filtros.get(FILTRO_TITULO_LIVRO);
+
+        //caso nenhum parametro tenha sido enviado
+        if( nomeAutor.isEmpty() && tituloLivro.isEmpty() ){
+            return mensagemProvider.getCustomizedBadRequest(
+                mensagemProvider.getGenericMensagemResponse("Enviar pelo menos um dos parâmetros: [nomeAutor ou tituloLivro]"));
+        }
+
+        //caso os dois parametros tenha sido enviados
+        if( !nomeAutor.isEmpty() && !tituloLivro.isEmpty() ){
+            return mensagemProvider.getCustomizedBadRequest(
+                mensagemProvider.getGenericMensagemResponse("Não é permitido enviar os dois parâmetros [nomeAutor e tituloLivro] ao mesmo tempo."));
+        }
+
+        ResponseEntity<?> responseFiltro = mensagemProvider.getGenericResponseNotFound("Nenhum Livro encontrado...");
+
+        //caso tenha sido enviado nomeAutor
+        if( !nomeAutor.isEmpty() ){
+            responseFiltro = getLivrosPorNomeAutor(nomeAutor);
+        }else if( !tituloLivro.isEmpty() ){
+            responseFiltro = getLivrosPorTituloLivro(tituloLivro);
+        }
+        
+        return responseFiltro;
+
+    }
+
+    private ResponseEntity<?> getLivrosPorNomeAutor(String nomeAutor){
+
+        List<MLivro> registros = repository
+            .findByAutorNome(nomeAutor);
+
+        if( registros.isEmpty() ){
+
+            return mensagemProvider.getGenericResponseNotFound(new StringBuilder()
+                .append("Livros não encontrados para o(a) autor(a) ")
+                .append(nomeAutor)
+                .toString());
+
+        }
+
+        return mensagemProvider.getGenericResponseSuccess(registros
+            .stream()
+            .map(converter::toDTO)
+            .collect(Collectors.toList()));
+
+    }
+
+    private ResponseEntity<?> getLivrosPorTituloLivro(String tituloLivro){
+
+        List<MLivro> registros = repository
+            .findByTitulo(tituloLivro);
+
+        if( registros.isEmpty() ){
+
+            return mensagemProvider.getGenericResponseNotFound(new StringBuilder()
+                .append("Livros não encontrados para título ")
+                .append(tituloLivro)
+                .toString());
+
+        }
+
+        return mensagemProvider.getGenericResponseSuccess(registros
+            .stream()
+            .map(converter::toDTO)
+            .collect(Collectors.toList()));
+
     }
 
 }

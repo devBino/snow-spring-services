@@ -3,6 +3,9 @@ package br.com.snowmanlabs.api_livros.request;
 import static br.com.snowmanlabs.api_livros.constants.TestConstants.*;
 import static io.restassured.RestAssured.given;
 
+import java.util.Map;
+import java.util.function.Consumer;
+
 import br.com.snowmanlabs.api_livros.domain.dto.TokenDTO;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -21,6 +24,35 @@ public class Requests {
     public static Response responseGet(final String pathEndPoint){
 
         RequestSpecification request = given()
+            .basePath(pathEndPoint)
+            .port(SERVER_PORT)
+            .contentType("application/json")
+            .header(HEADER_ORIGIN, ORIGIN)
+            .header(HEADER_AUTHORIZATION, String.format("Bearer %s", gerarToken()));
+
+        return request.get();
+
+    }
+
+    /**
+     * Recebe um end point e realiza requisição GET, 
+     * retornando response do GET realizado
+     * @param pathEndPoint
+     * @return
+     */
+    public static Response responseGet(final String pathEndPoint, Map<String, String> params){
+
+        RequestSpecification request = given();
+
+        Consumer< Map.Entry<String, String> > csParams = param -> request
+            .queryParam(param.getKey(), param.getValue());
+
+        params
+            .entrySet()
+            .stream()
+            .forEach(csParams);
+
+        request
             .basePath(pathEndPoint)
             .port(SERVER_PORT)
             .contentType("application/json")
