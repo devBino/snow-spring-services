@@ -64,7 +64,7 @@ public class IdiomaService
 
         updatedModel.setId( optModel.get().getId() );
 
-        return mensagemProvider.getGenericResponseSucess( 
+        return mensagemProvider.getGenericResponseSuccess( 
             converter.toDTO(repository.save(updatedModel)) );
 
     }
@@ -82,7 +82,7 @@ public class IdiomaService
             return mensagemProvider.getGenericResponseNotFound(mensagemEntidadeNaoEncontrado);
         }
 
-        return mensagemProvider.getGenericResponseSucess( 
+        return mensagemProvider.getGenericResponseSuccess( 
             converter.toDTO(optModel.get()) );
 
     }
@@ -128,7 +128,7 @@ public class IdiomaService
         dto.setTotalPaginas( registros.getTotalPages() );
         dto.setTotalRegistros( registros.getTotalElements() );
 
-        return mensagemProvider.getGenericResponseSucess( dto );
+        return mensagemProvider.getGenericResponseSuccess( dto );
         
     }
 

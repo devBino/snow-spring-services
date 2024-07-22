@@ -1,5 +1,9 @@
 package br.com.snowmanlabs.api_livros.controllers;
 
+import static br.com.snowmanlabs.api_livros.domain.service.constants.ServiceConstants.*;
+
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -99,6 +103,22 @@ public class LivroController {
     @DeleteMapping(value = "/deletar/{id}")
     public ResponseEntity<?> deletar(@PathVariable(value = "id") String id){
         return service.deletar(id);
+    }
+
+    /**
+     * Recebe requisição GET para listar Livros por nome do(a) autor(a)
+     * @param nomeAutor
+     * @return
+     */
+    @GetMapping(value = "/listar-filtro", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> listarPorNomeAutor(
+        @RequestParam(value = "nomeAutor", defaultValue = "") String nomeAutor,
+        @RequestParam(value = "tituloLivro", defaultValue = "") String tituloLivro
+    ){
+        return service.listarFiltros(Map.of(
+            FILTRO_NOME_AUTOR, nomeAutor,
+            FILTRO_TITULO_LIVRO, tituloLivro
+        ));
     }
     
 }

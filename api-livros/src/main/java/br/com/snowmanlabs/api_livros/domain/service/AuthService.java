@@ -67,7 +67,7 @@ public class AuthService {
             return mensagemProvider.getGenericResponseInternalServerError();
         }
 
-        return mensagemProvider.getGenericResponseSucess(dto);
+        return mensagemProvider.getGenericResponseSuccess(dto);
 
     }
 
