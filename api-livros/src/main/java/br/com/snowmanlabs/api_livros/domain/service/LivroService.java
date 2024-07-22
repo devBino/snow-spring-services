@@ -105,9 +105,21 @@ public class LivroService
             return mensagemProvider.getGenericResponseNotFound(mensagemEntidadeNaoEncontrado);
         }
 
-        repository.deleteById( optModel.get().getId() );
+        MLivro model = optModel.get();
 
-        return mensagemProvider.getNoContent();
+        StringBuilder detalhesLivro = new StringBuilder();
+
+        detalhesLivro.append(String.format("Titulo: %s\n", model.getTitulo()));
+        detalhesLivro.append(String.format("Autor: %s\n", model.getAutor().getNome()));
+        detalhesLivro.append(String.format("Idioma: %s\n", model.getIdioma().getNome()));
+        detalhesLivro.append(String.format("Codigo Idioma: %s\n", model.getIdioma().getNome()));
+        detalhesLivro.append(String.format("Total Paginas: %s\n", model.getNumeroPaginas()));
+
+        repository.deleteById( model.getId() );
+
+        String msgRetorno = detalhesLivro.toString();       
+
+        return mensagemProvider.getGenericResponseSuccess(msgRetorno);
 
     }
 
