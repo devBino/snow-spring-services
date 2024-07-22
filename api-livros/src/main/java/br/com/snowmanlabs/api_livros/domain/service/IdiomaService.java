@@ -65,7 +65,7 @@ public class IdiomaService
         updatedModel.setId( optModel.get().getId() );
 
         return mensagemProvider.getGenericResponseSucess( 
-            (MIdioma) repository.save(updatedModel) );
+            converter.toDTO(repository.save(updatedModel)) );
 
     }
 

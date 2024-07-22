@@ -15,6 +15,7 @@ import br.com.snowmanlabs.api_livros.configs.TestConfigs;
 import br.com.snowmanlabs.api_livros.domain.converter.IdiomaConverter;
 import br.com.snowmanlabs.api_livros.domain.dto.IdiomaDTO;
 import br.com.snowmanlabs.api_livros.domain.model.MIdioma;
+import br.com.snowmanlabs.api_livros.mock.MockTests;
 
 @SpringBootTest
 @ActiveProfiles("development")
@@ -30,21 +31,8 @@ public class TestIdiomaConverter {
     @BeforeEach
     public void preTests(){
 
-        mockModel = new MIdioma();
-
-        mockModel.setId(123L);
-        mockModel.setAtivo(1);
-        mockModel.setNome("Inglês (Unitad States)");
-        mockModel.setCodIdioma("en");
-        mockModel.setCodRegiao("en_US");
-
-        modckDTO = new IdiomaDTO();
-
-        modckDTO.setId(123L);
-        modckDTO.setAtivo(1);
-        modckDTO.setNome("Português (Brasil)");
-        modckDTO.setCodIdioma("pt");
-        modckDTO.setCodRegiao("pt_BR");
+        mockModel = MockTests.getIdiomaModel();
+        modckDTO = MockTests.getIdiomaDTO();
 
         convertedDTO = converter.toDTO(mockModel);
         convertedModel = converter.toModel(convertedDTO);

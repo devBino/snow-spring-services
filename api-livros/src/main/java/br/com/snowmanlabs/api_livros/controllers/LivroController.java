@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.snowmanlabs.api_livros.domain.dto.IdiomaDTO;
-import br.com.snowmanlabs.api_livros.domain.service.IdiomaService;
+import br.com.snowmanlabs.api_livros.domain.dto.LivroDTO;
+import br.com.snowmanlabs.api_livros.domain.service.LivroService;
 
 /**
  * Recebe requisições para manipular registros
- * da entidade Idioma
+ * da entidade Livro
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/idioma")
-public class IdiomaController {
-
+@RequestMapping("/livro")
+public class LivroController {
+    
     @Autowired
-    private IdiomaService service;
+    private LivroService service;
 
     /**
      * Recebe requisição POST para criar novo registro
@@ -39,7 +39,7 @@ public class IdiomaController {
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<?> criar(@RequestBody IdiomaDTO body){
+    public ResponseEntity<?> criar(@RequestBody LivroDTO body){
         return service.criar(body);
     }
 
@@ -53,7 +53,7 @@ public class IdiomaController {
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<?> atualizar(@RequestBody IdiomaDTO body){
+    public ResponseEntity<?> atualizar(@RequestBody LivroDTO body){
         return service.atualizar(body);
     }
     
@@ -69,7 +69,7 @@ public class IdiomaController {
     public ResponseEntity<?> detalhar(@PathVariable(value = "id") String id){
         return service.detalhar(id);
     }
-    
+
     /**
      * Recebe requisição GET para para listagem paginada
      * dos registros
@@ -100,5 +100,5 @@ public class IdiomaController {
     public ResponseEntity<?> deletar(@PathVariable(value = "id") String id){
         return service.deletar(id);
     }
-
+    
 }

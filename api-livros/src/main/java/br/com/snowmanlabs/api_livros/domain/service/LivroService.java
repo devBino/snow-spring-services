@@ -9,38 +9,38 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.snowmanlabs.api_livros.domain.converter.AutorConverter;
-import br.com.snowmanlabs.api_livros.domain.dto.AutorDTO;
-import br.com.snowmanlabs.api_livros.domain.dto.ListaAutoresDTO;
-import br.com.snowmanlabs.api_livros.domain.model.MAutor;
-import br.com.snowmanlabs.api_livros.domain.repository.AutorRepository;
+import br.com.snowmanlabs.api_livros.domain.converter.LivroConverter;
+import br.com.snowmanlabs.api_livros.domain.dto.LivroDTO;
+import br.com.snowmanlabs.api_livros.domain.dto.ListaLivrosDTO;
+import br.com.snowmanlabs.api_livros.domain.model.MLivro;
+import br.com.snowmanlabs.api_livros.domain.repository.LivroRepository;
 
 /**
  * Serve a API respondendo as requisições da camada 
- * de controllers da entidade Autor
+ * de controllers da entidade Livro
  */
 @Service
-public class AutorService
+public class LivroService
     extends GenericService {
-
-    @Autowired
-    private AutorRepository repository;
-
-    @Autowired
-    private AutorConverter converter;
-
-    public AutorService(){
-        super("Autor não encontrado");
-    }
     
+    @Autowired
+    private LivroRepository repository;
+
+    @Autowired
+    private LivroConverter converter;
+
+    public LivroService(){
+        super("Livro não encontrado");
+    }
+
     /**
-     * Cria novo Autor
+     * Cria novo Livro
      * @param dto
      * @return
      */
-    public ResponseEntity<?> criar(final AutorDTO dto){
+    public ResponseEntity<?> criar(final LivroDTO dto){
 
-        MAutor model = converter.toModel(dto);
+        MLivro model = converter.toModel(dto);
 
         return mensagemProvider.getGenericResponseCreated(
             converter.toDTO( repository.save(model) ) );
@@ -48,35 +48,35 @@ public class AutorService
     }
 
     /**
-     * Atualiza Autor existente
+     * Atualiza Livro existente
      * @param dto
      * @return
      */
-    public ResponseEntity<?> atualizar(final AutorDTO dto){
+    public ResponseEntity<?> atualizar(final LivroDTO dto){
 
-        final Optional<MAutor> optModel = repository.findById(dto.getId());
+        final Optional<MLivro> optModel = repository.findById(dto.getId());
 
         if( !optModel.isPresent() ){
             return mensagemProvider.getGenericResponseNotFound(mensagemEntidadeNaoEncontrado);
         }
 
-        final MAutor updatedModel = converter.toModel(dto);
+        final MLivro updatedModel = converter.toModel(dto);
 
         updatedModel.setId( optModel.get().getId() );
 
         return mensagemProvider.getGenericResponseSucess( 
-            converter.toDTO(repository.save(updatedModel)) );
+            converter.toDTO( repository.save(updatedModel)) );
 
     }
 
     /**
-     * Retorna os dados de um Autor pelo id
+     * Retorna os dados de um Livro pelo id
      * @param id
      * @return
      */
     public ResponseEntity<?> detalhar(final String id){
 
-        final Optional<MAutor> optModel = repository.findById(Long.valueOf(id));
+        final Optional<MLivro> optModel = repository.findById(Long.valueOf(id));
 
         if( !optModel.isPresent() ){
             return mensagemProvider.getGenericResponseNotFound(mensagemEntidadeNaoEncontrado);
@@ -88,13 +88,13 @@ public class AutorService
     }
 
     /**
-     * Deleta um Autor pelo id
+     * Deleta um Livro pelo id
      * @param id
      * @return
      */
     public ResponseEntity<?> deletar(final String id){
 
-        final Optional<MAutor> optModel = repository.findById(Long.valueOf(id));
+        final Optional<MLivro> optModel = repository.findById(Long.valueOf(id));
 
         if( !optModel.isPresent() ){
             return mensagemProvider.getGenericResponseNotFound(mensagemEntidadeNaoEncontrado);
@@ -118,13 +118,13 @@ public class AutorService
         
         Pageable paginacao = PageRequest.of(--vPage, Integer.valueOf(limit));
 
-        final Page<AutorDTO> registros = repository
+        final Page<LivroDTO> registros = repository
             .findAll(paginacao)
             .map(converter::toDTO);
 
-        final ListaAutoresDTO dto = new ListaAutoresDTO();
+        final ListaLivrosDTO dto = new ListaLivrosDTO();
 
-        dto.setAutores( registros.getContent() );
+        dto.setLivros( registros.getContent() );
         dto.setTotalPaginas( registros.getTotalPages() );
         dto.setTotalRegistros( registros.getTotalElements() );
 

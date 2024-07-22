@@ -69,6 +69,7 @@ public class AutorController {
     public ResponseEntity<?> detalhar(@PathVariable(value = "id") String id){
         return service.detalhar(id);
     }
+    
     /**
      * Recebe requisição GET para para listagem paginada
      * dos registros

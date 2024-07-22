@@ -1,5 +1,6 @@
 CREATE TABLE tb_livro (
     id INT NOT NULL AUTO_INCREMENT,
+    ativo INT NOT NULL DEFAULT 1,
     titulo VARCHAR(255) NOT NULL,
     autor_id INT NOT NULL,
     idioma_id INT NOT NULL,

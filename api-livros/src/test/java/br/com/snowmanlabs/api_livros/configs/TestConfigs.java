@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Primary;
 
 import br.com.snowmanlabs.api_livros.domain.converter.AutorConverter;
 import br.com.snowmanlabs.api_livros.domain.converter.IdiomaConverter;
+import br.com.snowmanlabs.api_livros.domain.converter.LivroConverter;
 
 @Configuration
 public class TestConfigs {
@@ -20,6 +21,12 @@ public class TestConfigs {
     @Primary
     public AutorConverter autorConverter(){
         return new AutorConverter();
+    }
+
+    @Bean
+    @Primary
+    public LivroConverter livroConverter(){
+        return new LivroConverter();
     }
 
 }

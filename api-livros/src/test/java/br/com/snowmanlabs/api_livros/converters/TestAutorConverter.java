@@ -16,6 +16,7 @@ import br.com.snowmanlabs.api_livros.domain.converter.AutorConverter;
 
 import br.com.snowmanlabs.api_livros.domain.dto.AutorDTO;
 import br.com.snowmanlabs.api_livros.domain.model.MAutor;
+import br.com.snowmanlabs.api_livros.mock.MockTests;
 
 @SpringBootTest
 @ActiveProfiles("development")
@@ -31,17 +32,8 @@ public class TestAutorConverter {
     @BeforeEach
     public void preTests(){
 
-        mockModel = new MAutor();
-
-        mockModel.setId(123L);
-        mockModel.setAtivo(1);
-        mockModel.setNome("Autor Teste 1");
-       
-        modckDTO = new AutorDTO();
-
-        modckDTO.setId(123L);
-        modckDTO.setAtivo(1);
-        modckDTO.setNome("Autor Teste 2");
+        mockModel = MockTests.getAutorModel();
+        modckDTO = MockTests.getAutorDTO();
         
         convertedDTO = converter.toDTO(mockModel);
         convertedModel = converter.toModel(convertedDTO);
