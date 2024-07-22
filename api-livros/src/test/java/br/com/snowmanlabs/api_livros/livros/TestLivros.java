@@ -102,7 +102,7 @@ public class TestLivros {
         responseDelete
             .then()
             .assertThat()
-            .statusCode(204);
+            .statusCode(200);
 
     }
 
