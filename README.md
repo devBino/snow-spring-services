@@ -17,7 +17,7 @@ Outro aspécto a ser mencionado, é que foram entregues em torno de 40 Story Poi
 
 <p style="text-align: justify;">
 Também nos preocupamos com CI/CD configurando pipelines para validar cada nova feature vinda para branch develop, bem como a fase de deploy para VPS quando as atividades de cada Milestone foram empacotadas em releases e mergeadas na master.
-O resultado disso, é que temos a aplicação rodanto também em uma VPS mantida por processos 100% automáticos de CI e CD, se beneficiando de Docker para isso.
+O resultado disso, é que temos a aplicação rodando também em uma VPS mantida por processos 100% automáticos de CI e CD, se beneficiando de Docker para isso.
 </p>
 
 ## Pipelines CI/CD
@@ -27,7 +27,8 @@ O resultado disso, é que temos a aplicação rodanto também em uma VPS mantida
 |Release/1.1.0|![CI Release/1.1.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.1.0) | [Fase 2](https://github.com/devBino/snow-spring-services/milestone/2)|
 |Release/1.2.0|![CI Release/1.2.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.2.0) | [Fase 3](https://github.com/devBino/snow-spring-services/milestone/3)|
 |Release/1.3.0|![CI Release/1.3.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.3.0) | [Fase 4](https://github.com/devBino/snow-spring-services/milestone/4)|
-|Master|![Master](https://github.com/devBino/snow-spring-services/actions/workflows/master_deploy.yml/badge.svg?branch=master) |[Fase 3](https://github.com/devBino/snow-spring-services/milestone/3)|
+|Release/1.4.0|![CI Release/1.4.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.4.0) | [Fase 5](https://github.com/devBino/snow-spring-services/milestone/5)|
+|Master|![Master](https://github.com/devBino/snow-spring-services/actions/workflows/master_deploy.yml/badge.svg?branch=master) |[Fase 5](https://github.com/devBino/snow-spring-services/milestone/5)|
 
 ## Como rodar os projetos
 
