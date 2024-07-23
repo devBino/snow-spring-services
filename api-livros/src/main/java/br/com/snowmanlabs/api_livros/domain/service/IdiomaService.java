@@ -12,9 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import br.com.snowmanlabs.api_livros.domain.converter.IdiomaConverter;
-import br.com.snowmanlabs.api_livros.domain.dto.AutorDTO;
+import br.com.snowmanlabs.api_livros.domain.dto.GenericParamsIdDTO;
 import br.com.snowmanlabs.api_livros.domain.dto.IdiomaDTO;
 import br.com.snowmanlabs.api_livros.domain.dto.ListaIdiomasDTO;
+import br.com.snowmanlabs.api_livros.domain.dto.PaginateParamsDTO;
 import br.com.snowmanlabs.api_livros.domain.model.MIdioma;
 import br.com.snowmanlabs.api_livros.domain.repository.IdiomaRepository;
 import jakarta.validation.ConstraintViolation;
@@ -97,6 +98,14 @@ public class IdiomaService
      */
     public ResponseEntity<?> detalhar(final String id){
 
+        GenericParamsIdDTO idDto = new GenericParamsIdDTO(id);
+
+        Set<ConstraintViolation<GenericParamsIdDTO>> erros = validator.validate(idDto);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
+
         final Optional<MIdioma> optModel = repository.findById(Long.valueOf(id));
 
         if( !optModel.isPresent() ){
@@ -114,6 +123,14 @@ public class IdiomaService
      * @return
      */
     public ResponseEntity<?> deletar(final String id){
+
+        GenericParamsIdDTO idDto = new GenericParamsIdDTO(id);
+
+        Set<ConstraintViolation<GenericParamsIdDTO>> erros = validator.validate(idDto);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
 
         final Optional<MIdioma> optModel = repository.findById(Long.valueOf(id));
 
@@ -135,6 +152,14 @@ public class IdiomaService
      */
     public ResponseEntity<?> listarRegistrosPaginacao(String page, String limit){
 
+        PaginateParamsDTO paramsDTO = new PaginateParamsDTO(page, limit);
+
+        Set<ConstraintViolation<PaginateParamsDTO>> erros = validator.validate(paramsDTO);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
+        
         Integer vPage = Integer.valueOf(page);
         
         Pageable paginacao = PageRequest.of(--vPage, Integer.valueOf(limit));

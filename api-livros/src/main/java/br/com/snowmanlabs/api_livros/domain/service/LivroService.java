@@ -18,6 +18,8 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import br.com.snowmanlabs.api_livros.domain.converter.LivroConverter;
 import br.com.snowmanlabs.api_livros.domain.dto.LivroDTO;
+import br.com.snowmanlabs.api_livros.domain.dto.PaginateParamsDTO;
+import br.com.snowmanlabs.api_livros.domain.dto.GenericParamsIdDTO;
 import br.com.snowmanlabs.api_livros.domain.dto.ListaLivrosDTO;
 import br.com.snowmanlabs.api_livros.domain.model.MLivro;
 import br.com.snowmanlabs.api_livros.domain.repository.LivroRepository;
@@ -101,6 +103,14 @@ public class LivroService
      */
     public ResponseEntity<?> detalhar(final String id){
 
+        GenericParamsIdDTO idDto = new GenericParamsIdDTO(id);
+
+        Set<ConstraintViolation<GenericParamsIdDTO>> erros = validator.validate(idDto);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
+
         final Optional<MLivro> optModel = repository.findById(Long.valueOf(id));
 
         if( !optModel.isPresent() ){
@@ -118,6 +128,14 @@ public class LivroService
      * @return
      */
     public ResponseEntity<?> deletar(final String id){
+
+        GenericParamsIdDTO idDto = new GenericParamsIdDTO(id);
+
+        Set<ConstraintViolation<GenericParamsIdDTO>> erros = validator.validate(idDto);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
 
         final Optional<MLivro> optModel = repository.findById(Long.valueOf(id));
 
@@ -151,6 +169,14 @@ public class LivroService
      */
     public ResponseEntity<?> listarRegistrosPaginacao(String page, String limit){
 
+        PaginateParamsDTO paramsDTO = new PaginateParamsDTO(page, limit);
+
+        Set<ConstraintViolation<PaginateParamsDTO>> erros = validator.validate(paramsDTO);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
+        
         Integer vPage = Integer.valueOf(page);
         
         Pageable paginacao = PageRequest.of(--vPage, Integer.valueOf(limit));
