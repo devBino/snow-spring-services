@@ -2,7 +2,7 @@ version: '3.9'
 services:
 
   ms-snow-api-livros:
-    image: devbino/ms-snow-api-livros:130
+    image: devbino/ms-snow-api-livros:140
     restart: always
     build: ./api-livros
     working_dir: /api-livros
