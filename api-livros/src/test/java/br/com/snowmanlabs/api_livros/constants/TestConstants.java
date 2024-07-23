@@ -22,14 +22,14 @@ public class TestConstants {
      * Constants para compor endpoints da API
      * durante os testes
      */
-    public static final String PATH_AUTH_TOKEN = "/auth/token/%s/%s";
+    public static final String PATH_AUTH_TOKEN = "/api/auth/token/%s/%s";
 
-    public static final String PATH_TESTE_TOKEN = "/auth/teste-token";
+    public static final String PATH_TESTE_TOKEN = "/api/auth/teste-token";
 
-    public static final String PATH_IDIOMA = "/idioma/%s";
+    public static final String PATH_IDIOMA = "/api/idioma/%s";
 
-    public static final String PATH_AUTHOR = "/autor/%s";
+    public static final String PATH_AUTHOR = "/api/autor/%s";
 
-    public static final String PATH_LIVRO = "/livro/%s";
+    public static final String PATH_LIVRO = "/api/livro/%s";
 
 }

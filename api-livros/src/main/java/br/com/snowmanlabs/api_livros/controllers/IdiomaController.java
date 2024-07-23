@@ -15,7 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.snowmanlabs.api_livros.domain.dto.IdiomaDTO;
+import br.com.snowmanlabs.api_livros.domain.dto.ListaIdiomasDTO;
 import br.com.snowmanlabs.api_livros.domain.service.IdiomaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * Recebe requisições para manipular registros
@@ -23,7 +29,8 @@ import br.com.snowmanlabs.api_livros.domain.service.IdiomaService;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/idioma")
+@RequestMapping("/api/idioma")
+@Tag(name = "Idioma", description = "Endpoints para Gerenciar Idiomas")
 public class IdiomaController {
 
     @Autowired
@@ -37,7 +44,34 @@ public class IdiomaController {
     @PostMapping(
         value = "/criar", 
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
+    )
+    @Operation(
+        summary = "Cria um Novo Idioma",
+        description = "Cria um Novo Idioma",
+        tags = {"Idioma"},
+        responses = {
+            @ApiResponse(
+                description = "Success", responseCode = "201",
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    )
+                }
+            ),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+        }
     )
     public ResponseEntity<?> criar(@RequestBody IdiomaDTO body){
         return service.criar(body);
@@ -51,7 +85,34 @@ public class IdiomaController {
     @PutMapping(
         value = "/atualizar", 
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
+    )
+    @Operation(
+        summary = "Atualiza um Idioma Existente",
+        description = "Atualiza um Idioma Existente",
+        tags = {"Idioma"},
+        responses = {
+            @ApiResponse(
+                description = "Success", responseCode = "200",
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    )
+                }
+            ),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+        }
     )
     public ResponseEntity<?> atualizar(@RequestBody IdiomaDTO body){
         return service.atualizar(body);
@@ -64,7 +125,34 @@ public class IdiomaController {
      */
     @GetMapping(
         value = "/detalhar/{id}", 
-        produces = MediaType.APPLICATION_JSON_VALUE
+        produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE
+        }
+    )
+    @Operation(
+        summary = "Detalhar Idioma pelo ID",
+        description = "Detalhar Idioma pelo ID",
+        tags = {"Idioma"},
+        responses = {
+            @ApiResponse(
+                description = "Success", responseCode = "200",
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = IdiomaDTO.class)
+                    )
+                }
+            ),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+        }
     )
     public ResponseEntity<?> detalhar(@PathVariable(value = "id") String id){
         return service.detalhar(id);
@@ -84,6 +172,30 @@ public class IdiomaController {
             MediaType.APPLICATION_XML_VALUE
         }
     )
+    @Operation(
+        summary = "Listagem paginada dos Idiomas",
+        description = "Listagem paginada dos Idiomas",
+        tags = {"Idioma"},
+        responses = {
+            @ApiResponse(
+                description = "Success", responseCode = "200",
+                content = {
+                    @Content(
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        schema = @Schema(implementation = ListaIdiomasDTO.class)
+                    ),
+                    @Content(
+                        mediaType = MediaType.APPLICATION_XML_VALUE,
+                        schema = @Schema(implementation = ListaIdiomasDTO.class)
+                    )
+                }
+            ),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+        }
+    )
     public ResponseEntity<?> listar(
         @RequestParam(value = "page", defaultValue = "1") String page,
         @RequestParam(value = "limit", defaultValue = "10") String limit
@@ -97,6 +209,23 @@ public class IdiomaController {
      * @return
      */
     @DeleteMapping(value = "/deletar/{id}")
+    @Operation(
+        summary = "Deleta um Idioma pelo seu ID",
+        description = "Deleta um Idioma pelo seu ID",
+        tags = {"Idioma"},
+        responses = {
+            @ApiResponse(
+                description = "No Content", responseCode = "204",
+                content = @Content(
+                    mediaType = "application/json"
+                )
+            ),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+        }
+    )
     public ResponseEntity<?> deletar(@PathVariable(value = "id") String id){
         return service.deletar(id);
     }
