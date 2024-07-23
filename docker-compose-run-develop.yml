@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+
+  ms-snow-api-livros:
+    image: devbino/ms-snow-api-livros:130
+    restart: always
+    build: ./api-livros
+    working_dir: /api-livros
+    ports:
+      - 8091:8091
+    command: mvn spring-boot:run
+
+networks:
+  snow-microsservices:
+    driver: bridge
