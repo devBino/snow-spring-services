@@ -13,7 +13,9 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import br.com.snowmanlabs.api_livros.domain.converter.AutorConverter;
 import br.com.snowmanlabs.api_livros.domain.dto.AutorDTO;
+import br.com.snowmanlabs.api_livros.domain.dto.GenericParamsIdDTO;
 import br.com.snowmanlabs.api_livros.domain.dto.ListaAutoresDTO;
+import br.com.snowmanlabs.api_livros.domain.dto.PaginateParamsDTO;
 import br.com.snowmanlabs.api_livros.domain.model.MAutor;
 import br.com.snowmanlabs.api_livros.domain.repository.AutorRepository;
 import jakarta.validation.ConstraintViolation;
@@ -96,6 +98,14 @@ public class AutorService
      */
     public ResponseEntity<?> detalhar(final String id){
 
+        GenericParamsIdDTO idDto = new GenericParamsIdDTO(id);
+
+        Set<ConstraintViolation<GenericParamsIdDTO>> erros = validator.validate(idDto);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
+
         final Optional<MAutor> optModel = repository.findById(Long.valueOf(id));
 
         if( !optModel.isPresent() ){
@@ -113,6 +123,14 @@ public class AutorService
      * @return
      */
     public ResponseEntity<?> deletar(final String id){
+
+        GenericParamsIdDTO idDto = new GenericParamsIdDTO(id);
+
+        Set<ConstraintViolation<GenericParamsIdDTO>> erros = validator.validate(idDto);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
 
         final Optional<MAutor> optModel = repository.findById(Long.valueOf(id));
 
@@ -133,6 +151,14 @@ public class AutorService
      * @return
      */
     public ResponseEntity<?> listarRegistrosPaginacao(String page, String limit){
+
+        PaginateParamsDTO paramsDTO = new PaginateParamsDTO(page, limit);
+
+        Set<ConstraintViolation<PaginateParamsDTO>> erros = validator.validate(paramsDTO);
+
+        if(!erros.isEmpty()){
+            return mensagemProvider.getResponseErrosValidations(erros);
+        }
 
         Integer vPage = Integer.valueOf(page);
         
