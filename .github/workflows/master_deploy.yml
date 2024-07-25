@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 env:
-    TAG_VERSION: 140
+    TAG_VERSION: 150
 
 jobs:
     build:
@@ -53,6 +53,10 @@ jobs:
             - name: Testes Unitários e de Integração do MS Api Livros
               working-directory: ./api-livros
               run: mvn test -Pdevelopment
+
+            - name: Testes Unitários e de Integração do MS Servico Email
+              working-directory: ./servico-email
+              run: mvn test -Pdevelopment
       
             - name: Derrubando os Serviços
               working-directory: ./
@@ -66,6 +70,8 @@ jobs:
               run: |
                 docker tag ${{ secrets.DOCKER_USERNAME }}/ms-snow-api-livros:latest ${{ secrets.DOCKER_USERNAME }}/ms-snow-api-livros:${{ env.TAG_VERSION }}
                 docker push ${{ secrets.DOCKER_USERNAME }}/ms-snow-api-livros:${{ env.TAG_VERSION }}
+                docker tag ${{ secrets.DOCKER_USERNAME }}/ms-snow-servico-email:latest ${{ secrets.DOCKER_USERNAME }}/ms-snow-servico-email:${{ env.TAG_VERSION }}
+                docker push ${{ secrets.DOCKER_USERNAME }}/ms-snow-servico-email:${{ env.TAG_VERSION }}
 
             - name: Realizando Deploy e Executando a Stack na VPS
               uses: appleboy/ssh-action@master
