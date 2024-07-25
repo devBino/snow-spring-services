@@ -2,6 +2,9 @@ CREATE TABLE IF NOT EXISTS tb_usuario (
     id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(60) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    uf VARCHAR(2) NOT NULL,
     status_envio VARCHAR(1) NOT NULL,
+    obs_envio VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (id)
 );
