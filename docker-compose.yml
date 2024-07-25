@@ -16,7 +16,7 @@ services:
     build: ./servico-email
     working_dir: /servico-email
     ports:
-      - 8092:8092
+      - 8093:8093
     command: mvn spring-boot:run
 
 networks:

@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS tb_usuario (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(60) NOT NULL,
+    status_envio VARCHAR(1) NOT NULL,
+    PRIMARY KEY (id)
+);
