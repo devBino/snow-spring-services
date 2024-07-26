@@ -2,12 +2,21 @@ version: '3.9'
 services:
 
   ms-snow-api-livros:
-    image: devbino/ms-snow-api-livros:140
+    image: devbino/ms-snow-api-livros:150
     restart: always
     build: ./api-livros
     working_dir: /api-livros
     ports:
       - 8091:8091
+    command: mvn spring-boot:run
+
+  ms-snow-servico-email:
+    image: devbino/ms-snow-servico-email:150
+    restart: always
+    build: ./servico-email
+    working_dir: /servico-email
+    ports:
+      - 8093:8093
     command: mvn spring-boot:run
 
 networks:
