@@ -29,7 +29,13 @@ public class ClimaCidadeService {
         ResponseEntity<PrevisaoTempoDTO> previsaoTempo = restTemplate.getForEntity(
             url, PrevisaoTempoDTO.class);
 
-        return previsaoTempo.getBody();
+        PrevisaoTempoDTO dadosPrevisao = previsaoTempo.getBody();
+
+        if( "default".equals( previsaoTempo.getBody().getBy() ) ){
+            return null;
+        }
+
+        return dadosPrevisao;
 
     }
 
