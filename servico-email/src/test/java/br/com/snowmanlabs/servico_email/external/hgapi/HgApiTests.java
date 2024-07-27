@@ -57,7 +57,7 @@ public class HgApiTests {
         "Curitiba,PR",
         "Campo Largo,PR",
         "Balsa Nova, PR",
-        "Santana de Parnaía,SP",
+        "Santana de Parnaíba,SP",
         "Rio Branco,AC",
         "Brasilia,DF",
         "Fortaleza,CE",
@@ -70,7 +70,7 @@ public class HgApiTests {
         "Guaratuba,PR",
         "Jundiai,SP",
         "Itapevi,SP",
-        "Lageado,RS",
+        "Canoas,RS",
         "Porto Alegre,RS"
     })
     public void testeCidade(String cidade){
