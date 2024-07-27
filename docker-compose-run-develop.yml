@@ -2,7 +2,7 @@ version: '3.9'
 services:
 
   ms-snow-api-livros:
-    image: devbino/ms-snow-api-livros:150
+    image: devbino/ms-snow-api-livros:160
     restart: always
     build: ./api-livros
     working_dir: /api-livros
@@ -11,7 +11,7 @@ services:
     command: mvn spring-boot:run
 
   ms-snow-servico-email:
-    image: devbino/ms-snow-servico-email:150
+    image: devbino/ms-snow-servico-email:160
     restart: always
     build: ./servico-email
     working_dir: /servico-email

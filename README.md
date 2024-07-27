@@ -29,6 +29,7 @@ O resultado disso, é que temos a aplicação rodando também em uma VPS mantida
 |Release/1.3.0|![CI Release/1.3.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.3.0) | [Fase 4](https://github.com/devBino/snow-spring-services/milestone/4)|
 |Release/1.4.0|![CI Release/1.4.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.4.0) | [Fase 5](https://github.com/devBino/snow-spring-services/milestone/5)|
 |Release/1.5.0|![CI Release/1.5.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.5.0) | [Fase 6](https://github.com/devBino/snow-spring-services/milestone/6)|
+|Release/1.6.0|![CI Release/1.6.0](https://github.com/devBino/snow-spring-services/actions/workflows/current_release.yml/badge.svg?branch=release/1.6.0) | [Fase 7](https://github.com/devBino/snow-spring-services/milestone/7)|
 |Master|![Master](https://github.com/devBino/snow-spring-services/actions/workflows/master_deploy.yml/badge.svg?branch=master) |[Fase 6](https://github.com/devBino/snow-spring-services/milestone/6)|
 
 ## Como rodar os projetos
