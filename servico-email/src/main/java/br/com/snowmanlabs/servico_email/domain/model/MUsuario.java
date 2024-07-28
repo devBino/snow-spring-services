@@ -10,6 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entidade do banco de dados representando Usuarios
+ */
 @Getter
 @Setter
 @NoArgsConstructor
